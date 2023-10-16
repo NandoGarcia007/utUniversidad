@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora MCD y MCM</title>
+</head>
+<body>
+    <h1>Calculadora MCD y MCM</h1>
+
+    <label for="numero1">Ingrese el primer numero entero positivo:</label>
+    <input type="number" id="numero1">
+
+    <label for="numero2">Ingrese el segundo numero entero positivo:</label>
+    <input type="number" id="numero2">
+
+    <button id="calcularMCDMCM">Calcular MCD y MCM</button>
+
+    <h2>Resultado:</h2>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('calcularMCDMCM').addEventListener('click', function() {
+            const numero1 = parseInt(document.getElementById('numero1').value);
+            const numero2 = parseInt(document.getElementById('numero2').value);
+
+            if (numero1 >= 0 && numero2 >= 0) {
+                const mcd = calcularMCD(numero1, numero2);
+                const mcm = calcularMCM(numero1, numero2);
+                document.getElementById('resultado').innerHTML = `El mcd de ${numero1} y ${numero2} es ${mcd}<br>El mcm de ${numero1} y ${numero2} es ${mcm}`;
+            } else {
+                document.getElementById('resultado').innerHTML = "Por favor, ingrese dos numeros enteros positivos.";
+            }
+        });
+
+        function calcularMCD(a, b) {
+            if (b === 0) {
+                return a;
+            }
+            return calcularMCD(b, a % b);
+        }
+
+        function calcularMCM(a, b) {
+            return (a * b) / calcularMCD(a, b);
+        }
+    </script>
+</body>
+</html>
